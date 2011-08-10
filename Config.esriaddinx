@@ -1,0 +1,22 @@
+﻿<ESRI.Configuration xmlns="http://schemas.esri.com/Desktop/AddIns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>GDX</Name>
+  <AddInID>{77b9e343-5214-4f12-b9d3-53d3e330e6aa}</AddInID>
+  <Description>Ein Add-in für ArcMap zum Upload von Geodaten.</Description>
+  <Version>1.0</Version>
+  <Image>Images\GDX.png</Image>
+  <Author>Philipp Rhan, Magnus Müller, Moritz Borgmann</Author>
+  <Company>GDX</Company>
+  <Date>8/8/2011</Date>
+  <Targets>
+    <Target name="Desktop" version="10.0" />
+  </Targets>
+  <AddIn language="CLR" library="GDX.dll" namespace="GDX">
+    <ArcMap>
+      <Commands>
+        <Button id="GDX_GDX_Button1" class="Button1" message="Ein Add-in für ArcMap zum Upload von Geodaten." caption="GDX Upload" tip="Ein Add-in für ArcMap zum Upload von Geodaten." category="GDX" image="Images\Button1.png">
+          <Help heading="GDX Plugin">Ein Add-in für ArcMap zum Upload von Geodaten.</Help>
+        </Button>
+      </Commands>
+    </ArcMap>
+  </AddIn>
+</ESRI.Configuration>
