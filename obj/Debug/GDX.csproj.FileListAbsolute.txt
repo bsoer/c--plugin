@@ -7,4 +7,7 @@ c:\users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Debug\GDX.Form1
 c:\users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Debug\ResGen.read.1.tlog
 c:\users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Debug\ResGen.write.1.tlog
 C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Debug\GDX.SaveToFolder.resources
+C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Debug\GDX.About.resources
+C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Debug\GDX.Properties.Resources.resources
+C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Debug\GDX.HelpForm.resources
 C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\bin\Debug\GDX.esriAddIn

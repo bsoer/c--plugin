@@ -19,6 +19,11 @@ using System.Collections.Specialized;
 using ESRI.ArcGIS.esriSystem;
 using ESRI.ArcGIS.Framework;
 using System.Collections;
+using ESRI.ArcGIS.Geoprocessor;
+using ESRI.ArcGIS.AnalysisTools;
+using ESRI.ArcGIS.CatalogUI;
+using ESRI.ArcGIS.Display;
+
 
 //using IronPython.Hosting;
 //using Microsoft.Scripting.Hosting;
@@ -30,7 +35,7 @@ namespace GDX
         String fpath_file;
         String sZipFileName;
         public static TextBox saveFolder = new TextBox();
-
+        string workingDir = "";
 
         public Form1()
         {
@@ -50,6 +55,7 @@ namespace GDX
             openFileDialog1.Title = "Add File";
             openFileDialog1.Filter = "All Files (*.*)|*.*";
             openFileDialog1.FileName = "";
+            openFileDialog1.InitialDirectory = System.IO.Directory.GetCurrentDirectory();
 
             // return if the user cancels the operation
             if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
@@ -123,8 +129,44 @@ namespace GDX
             }
         }
 
-        private void btnZip_Click(object sender, EventArgs e)
+        private string createGDXTempFolder()
         {
+            // Windows Default Temp Dir Path
+            string tempPath = System.IO.Path.GetTempPath();
+            //MessageBox.Show("Windows Temp Path = " + tempPath);
+
+            // current time (used for new Temp folder name)
+            String workingDir = tempPath + "GDX" + string.Format("-{0:yyyy-MM-dd_HH-mm-ss-ffff}", DateTime.Now);
+            //MessageBox.Show("WorkingDir: " + workingDir);
+
+            // Check for the existence of the new working directory
+            if (Directory.Exists(workingDir))
+            {
+                try
+                {
+                    MessageBox.Show("Directory " + workingDir + " already exists. \n" +
+                                        "Choose another folder to save the file. (Options Menu)");
+                    sbLabel.Text = "Choose another folder to save the file. (Options Menu)";
+                    return "";
+                }
+                catch
+                {
+                    MessageBox.Show("Rename the file or select a new location.");
+                    return "";
+                }
+            }
+            else
+            {
+                System.IO.Directory.CreateDirectory(workingDir);
+                //MessageBox.Show("Sub temp folder " + workingDir + " created");
+                return workingDir;
+            }
+        }
+
+
+
+        private void btnZip_Click(object sender, EventArgs e)
+        {   
             // make sure there are files to zip
             if (lstFilePaths.Items.Count < 1)
             {
@@ -133,39 +175,13 @@ namespace GDX
             }
 
             // make sure there is a destination defined
-            if (saveFolder.Text == string.Empty)
+            if (saveFolder.Text == string.Empty && workingDir == string.Empty)
             {
-                // Windows Default Temp Dir Path
-                string tempPath = System.IO.Path.GetTempPath();
-                //MessageBox.Show("Windows Temp Path = " + tempPath);
-
-                // current time (used for new Temp folder name)
-                String workingDir = tempPath + "GDX" + string.Format("-{0:yyyy-MM-dd_hh-mm-ss-ffff}", DateTime.Now);
-                //MessageBox.Show("WorkingDir: " + workingDir);
-
-                // Check for the existence of the new working directory
-                if (Directory.Exists(workingDir))
-                {
-                    try
-                    {
-                        MessageBox.Show("Directory " + workingDir + " already exists. \n" +
-                                            "Choose another folder to save the file. (Options Menu)");
-                        sbLabel.Text = "Choose another folder to save the file. (Options Menu)";
-                        return;
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Rename the file or select a new location.");
-                        return;
-                    }
-                }
-                else
-                {
-                    System.IO.Directory.CreateDirectory(workingDir);
-                    //MessageBox.Show("Sub temp folder " + workingDir + " created");
-                }
+                saveFolder.Text = createGDXTempFolder();
+            }
+            else
+            {
                 saveFolder.Text = workingDir;
-                workingDir = string.Empty;
             }
 
             saveFolder.Refresh();
@@ -279,6 +295,7 @@ namespace GDX
                 lstFilePaths.Items.Clear();
                 txtAddFile.Text = string.Empty;
                 saveFolder.Text = string.Empty;
+                workingDir = string.Empty;
                 //MessageBox.Show("Zipfilename: ", sZipFileName);
             }
             catch (Exception ex)
@@ -320,33 +337,57 @@ namespace GDX
             frm.Show();
         }
 
-        private void btnTest_Click(object sender, EventArgs e)
+        private void gDXHomepageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // save your current directory  
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            string envDir = Environment.CurrentDirectory;
-            string projDir = System.IO.Directory.GetCurrentDirectory();
-            string lastDir = openFileDialog.InitialDirectory;
-            openFileDialog.RestoreDirectory = true;
+            Process.Start("http://46.252.21.47/");
+        }
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.RestoreDirectory = true;
-            
-            saveFileDialog.InitialDirectory = "C:\\";
-            
-            //MessageBox.Show("ProjDir: " + projDir);
-            //MessageBox.Show("LastDir: " + lastDir);
-            //MessageBox.Show("lastDirs: " + lastDirs);
-            
-
+        private void btnCreate_auto_Click(object sender, EventArgs e)
+        {
+            // Initialize the geoprocessor. 
+            Geoprocessor GP = new Geoprocessor();
             try
             {
-                // Warning: Do not change the default export folder for mpk
+                if (workingDir == string.Empty)
+                {
+                    workingDir = createGDXTempFolder();
+                }
+
+                // Project Directory
+                //string projDir = System.IO.Directory.GetCurrentDirectory();
+                //MessageBox.Show("ProjDir: " + projDir);
+
+                // The active document is always the last template
+                ITemplates templates = ArcMap.Application.Templates;
+                string mxdPath = templates.get_Item(templates.Count - 1);
+                
+                ESRI.ArcGIS.DataManagementTools.PackageMap createPM = new ESRI.ArcGIS.DataManagementTools.PackageMap();
+                createPM.in_map = mxdPath;
+                createPM.output_file = workingDir + "\\" + Path.GetFileNameWithoutExtension(mxdPath) + ".mpk";
+                GP.Execute(createPM, null);
+                
+                // Add the file to the listbox list
+                lstFilePaths.Items.Add(workingDir + "\\" + Path.GetFileNameWithoutExtension(mxdPath) + ".mpk");
+            }
+            catch
+            {
+                MessageBox.Show("Python-Error (" + GP.GetReturnCode(0) + "), try to create the map package manually (option menu)");
+                return;
+            }
+        }
+
+        private void packageMapCreatorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //string envDir = Environment.CurrentDirectory;
+            //string projDir = System.IO.Directory.GetCurrentDirectory();
+            //MessageBox.Show("ProjDir: " + projDir);
+            //MessageBox.Show("LastDir: " + lastDir);
+            try
+            {
                 //Start MapPackage Export
                 UID atOpenID = new UID();
                 atOpenID.Value = "{71CB784E-4F2D-4BE5-A20F-8C400F714B8B}";
                 ICommandItem atCommand = ArcMap.Application.Document.CommandBars.Find(atOpenID, false, false);
-                //atCommand.Reset();
                 atCommand.Execute();
             }
             catch
@@ -354,62 +395,19 @@ namespace GDX
                 MessageBox.Show("Error: Python (manually)");
                 return;
             }
-
-            //Test
-            projDir = System.IO.Directory.GetCurrentDirectory();
-            lastDir = openFileDialog.InitialDirectory;
-            envDir = Environment.CurrentDirectory;
-
-            //MessageBox.Show("ProjDir2: " + projDir);
-            //MessageBox.Show("LastDi2r: " + lastDir);
-            //MessageBox.Show("lastDirs: " + lastDirs);
-            //string projDir = System.IO.Directory.SetCurrentDirectory(System.IO.Directory.GetCurrentDirectory());
         }
 
-        private void gDXHomepageToolStripMenuItem_Click(object sender, EventArgs e)
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("http://46.252.21.47/");
+            About frm = new About();
+            frm.Show(); 
         }
 
-        private void automaticallyCreateMpkToolStripMenuItem_Click(object sender, EventArgs e)
+        private void anleitungToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // TODO all :-)
-            try
-            {
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                Process py = new Process();
-                //MessageBox.Show("EnvVars: " + getEnv());
-                py.StartInfo.FileName = "C:\\Python26\\ArcGIS10.0\\pythonw.exe";
-                //py.StartInfo.Arguments = "C:\\Users\\bsoer\\Documents\\Visual Studio 2010\\Projects\\GDX\\GDX\\bin\\Debug\\mpc.py";
-                py.StartInfo.Arguments = "C:/Users/bsoer/Desktop/mpc.py";
-                py.StartInfo.UseShellExecute = false;
-                py.StartInfo.CreateNoWindow = true;
-                py.StartInfo.RedirectStandardOutput = true;
-                // py.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
-                py.Start();
-                py.BeginOutputReadLine();
-                py.WaitForExit();
-                py.Close();
-            }
-            catch
-            {
-                MessageBox.Show("Error: Python (auto)");
-                return;
-            }
+            HelpForm hfrm = new HelpForm();
+            Help.ShowHelp(hfrm, "..\\..\\Help\\GDX.chm", HelpNavigator.Index);
         }
 
-        private string getEnv()
-        {
-            StringBuilder SB = new StringBuilder();
-            IDictionary Dic = Environment.GetEnvironmentVariables();
-            foreach (DictionaryEntry de in Dic)
-            {
-                SB.Append(de.Key);
-                SB.Append(": ");
-                SB.Append(de.Value);
-                SB.Append(Environment.NewLine);
-            }
-            return SB.ToString();
-        }
     }
 }
