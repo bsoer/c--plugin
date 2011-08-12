@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaveToFolder));
             this.gbxDestination = new System.Windows.Forms.GroupBox();
             this.btnSaveBrowse = new System.Windows.Forms.Button();
             this.txtSaveTo = new System.Windows.Forms.TextBox();
@@ -43,12 +44,12 @@
             this.gbxDestination.Controls.Add(this.btnSaveBrowse);
             this.gbxDestination.Controls.Add(this.txtSaveTo);
             this.gbxDestination.Controls.Add(this.lblSaveTo);
-            this.gbxDestination.Location = new System.Drawing.Point(32, 25);
+            this.gbxDestination.Location = new System.Drawing.Point(12, 12);
             this.gbxDestination.Name = "gbxDestination";
-            this.gbxDestination.Size = new System.Drawing.Size(416, 101);
+            this.gbxDestination.Size = new System.Drawing.Size(408, 81);
             this.gbxDestination.TabIndex = 9;
             this.gbxDestination.TabStop = false;
-            this.gbxDestination.Text = "Save Compressed Folder";
+            this.gbxDestination.Text = "Set folder for compressed files";
             // 
             // btnSaveBrowse
             // 
@@ -64,9 +65,9 @@
             // txtSaveTo
             // 
             this.txtSaveTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.txtSaveTo.Location = new System.Drawing.Point(60, 30);
+            this.txtSaveTo.Location = new System.Drawing.Point(86, 30);
             this.txtSaveTo.Name = "txtSaveTo";
-            this.txtSaveTo.Size = new System.Drawing.Size(254, 20);
+            this.txtSaveTo.Size = new System.Drawing.Size(228, 20);
             this.txtSaveTo.TabIndex = 4;
             // 
             // lblSaveTo
@@ -75,13 +76,13 @@
             this.lblSaveTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.lblSaveTo.Location = new System.Drawing.Point(6, 35);
             this.lblSaveTo.Name = "lblSaveTo";
-            this.lblSaveTo.Size = new System.Drawing.Size(51, 13);
+            this.lblSaveTo.Size = new System.Drawing.Size(74, 13);
             this.lblSaveTo.TabIndex = 3;
-            this.lblSaveTo.Text = "Save To:";
+            this.lblSaveTo.Text = "Set Folder To:";
             // 
             // ok
             // 
-            this.ok.Location = new System.Drawing.Point(352, 141);
+            this.ok.Location = new System.Drawing.Point(332, 99);
             this.ok.Name = "ok";
             this.ok.Size = new System.Drawing.Size(75, 23);
             this.ok.TabIndex = 10;
@@ -91,7 +92,7 @@
             // 
             // cancel
             // 
-            this.cancel.Location = new System.Drawing.Point(92, 141);
+            this.cancel.Location = new System.Drawing.Point(17, 99);
             this.cancel.Name = "cancel";
             this.cancel.Size = new System.Drawing.Size(75, 23);
             this.cancel.TabIndex = 11;
@@ -103,12 +104,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(481, 190);
+            this.ClientSize = new System.Drawing.Size(433, 129);
             this.Controls.Add(this.cancel);
             this.Controls.Add(this.ok);
             this.Controls.Add(this.gbxDestination);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SaveToFolder";
-            this.Text = "SaveToFolder";
+            this.Text = "Change Folder";
             this.gbxDestination.ResumeLayout(false);
             this.gbxDestination.PerformLayout();
             this.ResumeLayout(false);

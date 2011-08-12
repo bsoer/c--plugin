@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Text;
 using System.IO;
 using System.Management;
@@ -15,6 +16,12 @@ using ICSharpCode.SharpZipLib.Zip;
 using ICSharpCode.SharpZipLib.GZip;
 using System.Net;
 using System.Collections.Specialized;
+using ESRI.ArcGIS.esriSystem;
+using ESRI.ArcGIS.Framework;
+using System.Collections;
+
+//using IronPython.Hosting;
+//using Microsoft.Scripting.Hosting;
 
 namespace GDX
 {
@@ -23,7 +30,7 @@ namespace GDX
         String fpath_file;
         String sZipFileName;
         public static TextBox saveFolder = new TextBox();
-        
+
 
         public Form1()
         {
@@ -128,13 +135,40 @@ namespace GDX
             // make sure there is a destination defined
             if (saveFolder.Text == string.Empty)
             {
-                MessageBox.Show("No destination file has been defined.", "Save To Empty");
-                return;
-            }
-            // TODO Windows Default Emp Dir angeben
-            saveFolder.Visible = true;
-            saveFolder.Refresh();
+                // Windows Default Temp Dir Path
+                string tempPath = System.IO.Path.GetTempPath();
+                //MessageBox.Show("Windows Temp Path = " + tempPath);
 
+                // current time (used for new Temp folder name)
+                String workingDir = tempPath + "GDX" + string.Format("-{0:yyyy-MM-dd_hh-mm-ss-ffff}", DateTime.Now);
+                //MessageBox.Show("WorkingDir: " + workingDir);
+
+                // Check for the existence of the new working directory
+                if (Directory.Exists(workingDir))
+                {
+                    try
+                    {
+                        MessageBox.Show("Directory " + workingDir + " already exists. \n" +
+                                            "Choose another folder to save the file. (Options Menu)");
+                        sbLabel.Text = "Choose another folder to save the file. (Options Menu)";
+                        return;
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Rename the file or select a new location.");
+                        return;
+                    }
+                }
+                else
+                {
+                    System.IO.Directory.CreateDirectory(workingDir);
+                    //MessageBox.Show("Sub temp folder " + workingDir + " created");
+                }
+                saveFolder.Text = workingDir;
+                workingDir = string.Empty;
+            }
+
+            saveFolder.Refresh();
             // name the zip file whatever the folder is named
             // by splitting the file path to get the folder name
             string[] sTemp = saveFolder.Text.Split('\\');
@@ -148,15 +182,14 @@ namespace GDX
                 // move it to the folder
                 try
                 {
-                    MessageBox.Show("The file " + sZipFileName + " already exists. \n" +
-                                        "Choose another Folder to save the file. (Options Menu)", "Existing File Name");
+                    MessageBox.Show("The file " + sZipFileName + ".zip already exists in " + saveFolder.Text + "\\. \n" +
+                                        "Choose another folder to save the file. (Options Menu)");
                     sbLabel.Text = "Choose another Folder to save the file. (Options Menu)";
-                    saveFolder.Focus();
                     return;
                 }
                 catch
                 {
-                    MessageBox.Show("Rename the file or select a new location.", "File Error");
+                    MessageBox.Show("Rename the file or select a new location.");
                     return;
                 }
             }
@@ -215,7 +248,7 @@ namespace GDX
                         entry.DateTime = DateTime.Now;
                         s.PutNextEntry(entry);
 
-                        using (FileStream fs = File.OpenRead(file))
+                        using (System.IO.FileStream fs = File.OpenRead(file))
                         {
                             int sourceBytes;
                             do
@@ -232,19 +265,20 @@ namespace GDX
 
                 // remove the progress bar + change lable
                 sbProgressBar.Visible = false;
-                sbLabel.Text = "Files have been zipped. Zip file " + fpath_file + " created.";
+                sbLabel.Text = "Files have been zipped. Zip file " + fpath_file + "created.";
 
                 // clean up files by deleting the temp folder and its content
                 System.IO.Directory.Delete(saveFolder.Text + "\\TempZipFile\\", true);
 
                 // Notify user
                 fpath_file = saveFolder.Text + "\\" + sZipFileName + ".zip";
-                MessageBox.Show("Zip file " + fpath_file + " created.");
+                //MessageBox.Show("Zip file " + fpath_file + " created.");
+                txbFilename.Text = sZipFileName + ".zip";
 
                 // empty everything
                 lstFilePaths.Items.Clear();
-                //txtSaveTo.Text = string.Empty;
                 txtAddFile.Text = string.Empty;
+                saveFolder.Text = string.Empty;
                 //MessageBox.Show("Zipfilename: ", sZipFileName);
             }
             catch (Exception ex)
@@ -258,7 +292,7 @@ namespace GDX
         {
             sbProgressBar.Visible = true;
             sbLabel.Text = "Uploading, please wait ... ";
-            
+
             NameValueCollection fields = new NameValueCollection();
             fields.Add("upload[name]", txtFName.Text);
             fields.Add("upload[description]", txtFDescription.Text);
@@ -266,7 +300,8 @@ namespace GDX
             KeyValuePair<string, string> credentials = new KeyValuePair<string, string>(username.Text, password.Text);
 
             //start upload
-            String result = UploadClass.upload(fields, fpath_file, credentials); 
+            // TODO add "Data Type" (Shape/Raster)
+            String result = UploadClass.upload(fields, fpath_file, credentials);
 
             //display result
             MessageBox.Show(result);
@@ -283,6 +318,98 @@ namespace GDX
         {
             SaveToFolder frm = new SaveToFolder();
             frm.Show();
+        }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            // save your current directory  
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            string envDir = Environment.CurrentDirectory;
+            string projDir = System.IO.Directory.GetCurrentDirectory();
+            string lastDir = openFileDialog.InitialDirectory;
+            openFileDialog.RestoreDirectory = true;
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.RestoreDirectory = true;
+            
+            saveFileDialog.InitialDirectory = "C:\\";
+            
+            //MessageBox.Show("ProjDir: " + projDir);
+            //MessageBox.Show("LastDir: " + lastDir);
+            //MessageBox.Show("lastDirs: " + lastDirs);
+            
+
+            try
+            {
+                // Warning: Do not change the default export folder for mpk
+                //Start MapPackage Export
+                UID atOpenID = new UID();
+                atOpenID.Value = "{71CB784E-4F2D-4BE5-A20F-8C400F714B8B}";
+                ICommandItem atCommand = ArcMap.Application.Document.CommandBars.Find(atOpenID, false, false);
+                //atCommand.Reset();
+                atCommand.Execute();
+            }
+            catch
+            {
+                MessageBox.Show("Error: Python (manually)");
+                return;
+            }
+
+            //Test
+            projDir = System.IO.Directory.GetCurrentDirectory();
+            lastDir = openFileDialog.InitialDirectory;
+            envDir = Environment.CurrentDirectory;
+
+            //MessageBox.Show("ProjDir2: " + projDir);
+            //MessageBox.Show("LastDi2r: " + lastDir);
+            //MessageBox.Show("lastDirs: " + lastDirs);
+            //string projDir = System.IO.Directory.SetCurrentDirectory(System.IO.Directory.GetCurrentDirectory());
+        }
+
+        private void gDXHomepageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://46.252.21.47/");
+        }
+
+        private void automaticallyCreateMpkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // TODO all :-)
+            try
+            {
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                Process py = new Process();
+                //MessageBox.Show("EnvVars: " + getEnv());
+                py.StartInfo.FileName = "C:\\Python26\\ArcGIS10.0\\pythonw.exe";
+                //py.StartInfo.Arguments = "C:\\Users\\bsoer\\Documents\\Visual Studio 2010\\Projects\\GDX\\GDX\\bin\\Debug\\mpc.py";
+                py.StartInfo.Arguments = "C:/Users/bsoer/Desktop/mpc.py";
+                py.StartInfo.UseShellExecute = false;
+                py.StartInfo.CreateNoWindow = true;
+                py.StartInfo.RedirectStandardOutput = true;
+                // py.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
+                py.Start();
+                py.BeginOutputReadLine();
+                py.WaitForExit();
+                py.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Error: Python (auto)");
+                return;
+            }
+        }
+
+        private string getEnv()
+        {
+            StringBuilder SB = new StringBuilder();
+            IDictionary Dic = Environment.GetEnvironmentVariables();
+            foreach (DictionaryEntry de in Dic)
+            {
+                SB.Append(de.Key);
+                SB.Append(": ");
+                SB.Append(de.Value);
+                SB.Append(Environment.NewLine);
+            }
+            return SB.ToString();
         }
     }
 }

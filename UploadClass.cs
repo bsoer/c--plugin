@@ -61,7 +61,8 @@ namespace GDX
             while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
             {
                 requestStream.Write(buffer, 0, bytesRead);
-                MessageBox.Show("WebreqSize = " + webrequest_size + "( postHeader: " + postHeaderBytes.Length + ", fileStream: " + fileStream.Length + ", boundaryBytes: " + boundaryBytes.Length + ")");
+                // TODO expected uploadtime and upload status in progressbar 
+                //MessageBox.Show("WebreqSize = " + webrequest_size + "( postHeader: " + postHeaderBytes.Length + ", fileStream: " + fileStream.Length + ", boundaryBytes: " + boundaryBytes.Length + ")");
             }
 
             // Write out the trailing boundary
