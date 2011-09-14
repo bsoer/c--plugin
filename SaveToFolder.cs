@@ -15,6 +15,13 @@ namespace GDX
         {
             InitializeComponent();
         }
+
+        public string TextImTextBoxAufForm2
+        {
+            get { return this.txtSaveTo.Text; }
+            set { this.txtSaveTo.Text = value; }
+        }
+
         private void btnSaveBrowse_Click(object sender, EventArgs e)
         {
             // clear the folder path
@@ -31,7 +38,6 @@ namespace GDX
         private void ok_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
-            Form1.saveFolder.Text = txtSaveTo.Text;
             this.Close();
         }
 
@@ -40,6 +46,10 @@ namespace GDX
             DialogResult = DialogResult.Cancel;
             this.Close();
         }
+
+
+
+
 
     }
 }

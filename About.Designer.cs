@@ -45,9 +45,9 @@
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Help;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(80, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(117, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(155, 117);
+            this.pictureBox1.Size = new System.Drawing.Size(75, 42);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -56,7 +56,7 @@
             // lblPhilipp
             // 
             this.lblPhilipp.AutoSize = true;
-            this.lblPhilipp.Location = new System.Drawing.Point(12, 150);
+            this.lblPhilipp.Location = new System.Drawing.Point(11, 77);
             this.lblPhilipp.Name = "lblPhilipp";
             this.lblPhilipp.Size = new System.Drawing.Size(67, 13);
             this.lblPhilipp.TabIndex = 1;
@@ -65,7 +65,7 @@
             // lblMagnus
             // 
             this.lblMagnus.AutoSize = true;
-            this.lblMagnus.Location = new System.Drawing.Point(12, 171);
+            this.lblMagnus.Location = new System.Drawing.Point(11, 98);
             this.lblMagnus.Name = "lblMagnus";
             this.lblMagnus.Size = new System.Drawing.Size(76, 13);
             this.lblMagnus.TabIndex = 2;
@@ -74,7 +74,7 @@
             // lblMoritz
             // 
             this.lblMoritz.AutoSize = true;
-            this.lblMoritz.Location = new System.Drawing.Point(12, 192);
+            this.lblMoritz.Location = new System.Drawing.Point(11, 119);
             this.lblMoritz.Name = "lblMoritz";
             this.lblMoritz.Size = new System.Drawing.Size(86, 13);
             this.lblMoritz.TabIndex = 3;
@@ -83,7 +83,7 @@
             // lblMailPh
             // 
             this.lblMailPh.AutoSize = true;
-            this.lblMailPh.Location = new System.Drawing.Point(161, 150);
+            this.lblMailPh.Location = new System.Drawing.Point(154, 77);
             this.lblMailPh.Name = "lblMailPh";
             this.lblMailPh.Size = new System.Drawing.Size(142, 13);
             this.lblMailPh.TabIndex = 4;
@@ -92,7 +92,7 @@
             // lblMailMag
             // 
             this.lblMailMag.AutoSize = true;
-            this.lblMailMag.Location = new System.Drawing.Point(138, 171);
+            this.lblMailMag.Location = new System.Drawing.Point(131, 98);
             this.lblMailMag.Name = "lblMailMag";
             this.lblMailMag.Size = new System.Drawing.Size(165, 13);
             this.lblMailMag.TabIndex = 5;
@@ -101,7 +101,7 @@
             // lblMailMor
             // 
             this.lblMailMor.AutoSize = true;
-            this.lblMailMor.Location = new System.Drawing.Point(135, 192);
+            this.lblMailMor.Location = new System.Drawing.Point(128, 119);
             this.lblMailMor.Name = "lblMailMor";
             this.lblMailMor.Size = new System.Drawing.Size(168, 13);
             this.lblMailMor.TabIndex = 6;
@@ -109,7 +109,7 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(118, 227);
+            this.btnOk.Location = new System.Drawing.Point(117, 154);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 7;
@@ -121,7 +121,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(315, 260);
+            this.ClientSize = new System.Drawing.Size(311, 188);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.lblMailMor);
             this.Controls.Add(this.lblMailPh);

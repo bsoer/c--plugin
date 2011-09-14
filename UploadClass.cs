@@ -132,7 +132,7 @@ namespace GDX
                 string result = sr.ReadToEnd();
                 //Console.WriteLine(result);
                 //Console.WriteLine(sr.ReadToEnd());
-                return "Datei wurde erfolgreich hochgeladen.";
+                return "File successfully uploaded.";
             }
             catch (WebException webex)
             {
@@ -145,13 +145,13 @@ namespace GDX
                     resp_error = r.ReadToEnd();
                     if (resp_error.Contains("password"))
                     {
-                        resp_error = "Benutzername oder Passwort wurden falsch eingegeben.";
+                        resp_error = "Incorrect username or password. Please try again.";
                     }
                     r.Close();
                 }
                 //Console.WriteLine(webex.Message);
                 //Console.WriteLine(data2);
-                return "Fehler: " + resp_error;
+                return "Error: " + resp_error;
             }
             //Console.ReadLine();
 

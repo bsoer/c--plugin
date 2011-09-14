@@ -10,4 +10,6 @@ C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Debug\GDX.SaveT
 C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Debug\GDX.About.resources
 C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Debug\GDX.Properties.Resources.resources
 C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Debug\GDX.HelpForm.resources
+C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Debug\GDX.UploadWait.resources
+C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Debug\GDX.AddData.resources
 C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\bin\Debug\GDX.esriAddIn

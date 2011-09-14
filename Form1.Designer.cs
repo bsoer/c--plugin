@@ -36,22 +36,18 @@
             this.username = new System.Windows.Forms.TextBox();
             this.passwort = new System.Windows.Forms.Label();
             this.benutzer = new System.Windows.Forms.Label();
-            this.gbxAddFiles = new System.Windows.Forms.GroupBox();
-            this.btnZip = new System.Windows.Forms.Button();
-            this.lblFiles = new System.Windows.Forms.Label();
-            this.lstFilePaths = new System.Windows.Forms.ListBox();
-            this.btnRemoveFile = new System.Windows.Forms.Button();
-            this.btnAddFile = new System.Windows.Forms.Button();
-            this.btnBrowse = new System.Windows.Forms.Button();
-            this.txtAddFile = new System.Windows.Forms.TextBox();
-            this.lblAddFile = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.msOptions = new System.Windows.Forms.MenuStrip();
             this.optionenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gDXHomepageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeZipFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.packageMapCreatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.anleitungToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnAddOtherFiles = new System.Windows.Forms.Button();
             this.txbFilename = new System.Windows.Forms.TextBox();
             this.lblFile = new System.Windows.Forms.Label();
             this.lblDataType = new System.Windows.Forms.Label();
@@ -59,7 +55,7 @@
             this.txtFDescription = new System.Windows.Forms.TextBox();
             this.txtFName = new System.Windows.Forms.TextBox();
             this.chbFRaster = new System.Windows.Forms.CheckBox();
-            this.chbFShape = new System.Windows.Forms.CheckBox();
+            this.chbFVector = new System.Windows.Forms.CheckBox();
             this.lblFTags = new System.Windows.Forms.Label();
             this.lblFDescription = new System.Windows.Forms.Label();
             this.lblFName = new System.Windows.Forms.Label();
@@ -67,15 +63,10 @@
             this.sbProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.sbLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnCreate_auto = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnCreate_auto = new System.Windows.Forms.Button();
-            this.packageMapCreatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.anleitungToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gbxLogin.SuspendLayout();
-            this.gbxAddFiles.SuspendLayout();
             this.msOptions.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.statusBar.SuspendLayout();
@@ -91,7 +82,7 @@
             this.gbxLogin.Controls.Add(this.passwort);
             this.gbxLogin.Controls.Add(this.benutzer);
             this.gbxLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbxLogin.Location = new System.Drawing.Point(12, 489);
+            this.gbxLogin.Location = new System.Drawing.Point(12, 291);
             this.gbxLogin.Name = "gbxLogin";
             this.gbxLogin.Size = new System.Drawing.Size(449, 128);
             this.gbxLogin.TabIndex = 4;
@@ -157,96 +148,6 @@
             this.benutzer.TabIndex = 0;
             this.benutzer.Text = "User:";
             // 
-            // gbxAddFiles
-            // 
-            this.gbxAddFiles.Controls.Add(this.btnZip);
-            this.gbxAddFiles.Controls.Add(this.lblFiles);
-            this.gbxAddFiles.Controls.Add(this.lstFilePaths);
-            this.gbxAddFiles.Controls.Add(this.btnRemoveFile);
-            this.gbxAddFiles.Controls.Add(this.btnAddFile);
-            this.gbxAddFiles.Controls.Add(this.btnBrowse);
-            this.gbxAddFiles.Controls.Add(this.txtAddFile);
-            this.gbxAddFiles.Controls.Add(this.lblAddFile);
-            this.gbxAddFiles.Location = new System.Drawing.Point(12, 99);
-            this.gbxAddFiles.Name = "gbxAddFiles";
-            this.gbxAddFiles.Size = new System.Drawing.Size(449, 192);
-            this.gbxAddFiles.TabIndex = 5;
-            this.gbxAddFiles.TabStop = false;
-            this.gbxAddFiles.Text = "Select Files for Upload";
-            // 
-            // btnZip
-            // 
-            this.btnZip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.btnZip.Location = new System.Drawing.Point(349, 154);
-            this.btnZip.Name = "btnZip";
-            this.btnZip.Size = new System.Drawing.Size(87, 23);
-            this.btnZip.TabIndex = 7;
-            this.btnZip.Text = "Zip Now";
-            this.btnZip.UseVisualStyleBackColor = true;
-            this.btnZip.Click += new System.EventHandler(this.btnZip_Click);
-            // 
-            // lblFiles
-            // 
-            this.lblFiles.AutoSize = true;
-            this.lblFiles.Location = new System.Drawing.Point(41, 57);
-            this.lblFiles.Name = "lblFiles";
-            this.lblFiles.Size = new System.Drawing.Size(31, 13);
-            this.lblFiles.TabIndex = 6;
-            this.lblFiles.Text = "Files:";
-            // 
-            // lstFilePaths
-            // 
-            this.lstFilePaths.FormattingEnabled = true;
-            this.lstFilePaths.Location = new System.Drawing.Point(81, 56);
-            this.lstFilePaths.Name = "lstFilePaths";
-            this.lstFilePaths.Size = new System.Drawing.Size(257, 121);
-            this.lstFilePaths.TabIndex = 4;
-            // 
-            // btnRemoveFile
-            // 
-            this.btnRemoveFile.Location = new System.Drawing.Point(349, 86);
-            this.btnRemoveFile.Name = "btnRemoveFile";
-            this.btnRemoveFile.Size = new System.Drawing.Size(87, 23);
-            this.btnRemoveFile.TabIndex = 6;
-            this.btnRemoveFile.Text = "Remove File";
-            this.btnRemoveFile.UseVisualStyleBackColor = true;
-            this.btnRemoveFile.Click += new System.EventHandler(this.btnRemoveFile_Click);
-            // 
-            // btnAddFile
-            // 
-            this.btnAddFile.Location = new System.Drawing.Point(349, 57);
-            this.btnAddFile.Name = "btnAddFile";
-            this.btnAddFile.Size = new System.Drawing.Size(87, 23);
-            this.btnAddFile.TabIndex = 5;
-            this.btnAddFile.Text = "Add File";
-            this.btnAddFile.UseVisualStyleBackColor = true;
-            this.btnAddFile.Click += new System.EventHandler(this.btnAddFile_Click);
-            // 
-            // btnBrowse
-            // 
-            this.btnBrowse.Location = new System.Drawing.Point(349, 27);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(87, 23);
-            this.btnBrowse.TabIndex = 3;
-            this.btnBrowse.Text = "Browse ...";
-            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
-            // 
-            // txtAddFile
-            // 
-            this.txtAddFile.Location = new System.Drawing.Point(80, 30);
-            this.txtAddFile.Name = "txtAddFile";
-            this.txtAddFile.Size = new System.Drawing.Size(258, 20);
-            this.txtAddFile.TabIndex = 2;
-            // 
-            // lblAddFile
-            // 
-            this.lblAddFile.AutoSize = true;
-            this.lblAddFile.Location = new System.Drawing.Point(24, 30);
-            this.lblAddFile.Name = "lblAddFile";
-            this.lblAddFile.Size = new System.Drawing.Size(48, 13);
-            this.lblAddFile.TabIndex = 0;
-            this.lblAddFile.Text = "Add File:";
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -269,8 +170,8 @@
             this.changeZipFolderToolStripMenuItem,
             this.packageMapCreatorToolStripMenuItem});
             this.optionenToolStripMenuItem.Name = "optionenToolStripMenuItem";
-            this.optionenToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
-            this.optionenToolStripMenuItem.Text = "Optionen";
+            this.optionenToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionenToolStripMenuItem.Text = "Options";
             // 
             // gDXHomepageToolStripMenuItem
             // 
@@ -286,8 +187,39 @@
             this.changeZipFolderToolStripMenuItem.Text = "Change Zip Folder";
             this.changeZipFolderToolStripMenuItem.Click += new System.EventHandler(this.changeZipFolderToolStripMenuItem_Click_1);
             // 
+            // packageMapCreatorToolStripMenuItem
+            // 
+            this.packageMapCreatorToolStripMenuItem.Name = "packageMapCreatorToolStripMenuItem";
+            this.packageMapCreatorToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.packageMapCreatorToolStripMenuItem.Text = "Package Map Creator";
+            this.packageMapCreatorToolStripMenuItem.Click += new System.EventHandler(this.packageMapCreatorToolStripMenuItem_Click);
+            // 
+            // hilfeToolStripMenuItem
+            // 
+            this.hilfeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.anleitungToolStripMenuItem,
+            this.aboutToolStripMenuItem});
+            this.hilfeToolStripMenuItem.Name = "hilfeToolStripMenuItem";
+            this.hilfeToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.hilfeToolStripMenuItem.Text = "Help";
+            // 
+            // anleitungToolStripMenuItem
+            // 
+            this.anleitungToolStripMenuItem.Name = "anleitungToolStripMenuItem";
+            this.anleitungToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.anleitungToolStripMenuItem.Text = "manual";
+            this.anleitungToolStripMenuItem.Click += new System.EventHandler(this.anleitungToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.aboutToolStripMenuItem.Text = "about";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnAddOtherFiles);
             this.groupBox1.Controls.Add(this.txbFilename);
             this.groupBox1.Controls.Add(this.lblFile);
             this.groupBox1.Controls.Add(this.lblDataType);
@@ -295,16 +227,26 @@
             this.groupBox1.Controls.Add(this.txtFDescription);
             this.groupBox1.Controls.Add(this.txtFName);
             this.groupBox1.Controls.Add(this.chbFRaster);
-            this.groupBox1.Controls.Add(this.chbFShape);
+            this.groupBox1.Controls.Add(this.chbFVector);
             this.groupBox1.Controls.Add(this.lblFTags);
             this.groupBox1.Controls.Add(this.lblFDescription);
             this.groupBox1.Controls.Add(this.lblFName);
-            this.groupBox1.Location = new System.Drawing.Point(12, 297);
+            this.groupBox1.Location = new System.Drawing.Point(12, 99);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(449, 186);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "File Description";
+            // 
+            // btnAddOtherFiles
+            // 
+            this.btnAddOtherFiles.Location = new System.Drawing.Point(349, 30);
+            this.btnAddOtherFiles.Name = "btnAddOtherFiles";
+            this.btnAddOtherFiles.Size = new System.Drawing.Size(87, 23);
+            this.btnAddOtherFiles.TabIndex = 13;
+            this.btnAddOtherFiles.Text = "Add other files";
+            this.btnAddOtherFiles.UseVisualStyleBackColor = true;
+            this.btnAddOtherFiles.Click += new System.EventHandler(this.btnAddOtherFiles_Click);
             // 
             // txbFilename
             // 
@@ -364,15 +306,15 @@
             this.chbFRaster.Text = "Raster";
             this.chbFRaster.UseVisualStyleBackColor = true;
             // 
-            // chbFShape
+            // chbFVector
             // 
-            this.chbFShape.AutoSize = true;
-            this.chbFShape.Location = new System.Drawing.Point(80, 157);
-            this.chbFShape.Name = "chbFShape";
-            this.chbFShape.Size = new System.Drawing.Size(57, 17);
-            this.chbFShape.TabIndex = 11;
-            this.chbFShape.Text = "Shape";
-            this.chbFShape.UseVisualStyleBackColor = true;
+            this.chbFVector.AutoSize = true;
+            this.chbFVector.Location = new System.Drawing.Point(80, 157);
+            this.chbFVector.Name = "chbFVector";
+            this.chbFVector.Size = new System.Drawing.Size(57, 17);
+            this.chbFVector.TabIndex = 11;
+            this.chbFVector.Text = "Vector";
+            this.chbFVector.UseVisualStyleBackColor = true;
             // 
             // lblFTags
             // 
@@ -406,7 +348,7 @@
             this.statusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sbProgressBar,
             this.sbLabel});
-            this.statusBar.Location = new System.Drawing.Point(0, 629);
+            this.statusBar.Location = new System.Drawing.Point(0, 428);
             this.statusBar.Name = "statusBar";
             this.statusBar.Size = new System.Drawing.Size(473, 22);
             this.statusBar.TabIndex = 8;
@@ -436,6 +378,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Map Package";
             // 
+            // btnCreate_auto
+            // 
+            this.btnCreate_auto.Location = new System.Drawing.Point(349, 14);
+            this.btnCreate_auto.Name = "btnCreate_auto";
+            this.btnCreate_auto.Size = new System.Drawing.Size(87, 23);
+            this.btnCreate_auto.TabIndex = 13;
+            this.btnCreate_auto.Text = "Create";
+            this.btnCreate_auto.UseVisualStyleBackColor = true;
+            this.btnCreate_auto.Click += new System.EventHandler(this.btnCreate_auto_Click);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -454,55 +406,14 @@
             this.label2.TabIndex = 12;
             this.label2.Text = "Create Map Package";
             // 
-            // btnCreate_auto
-            // 
-            this.btnCreate_auto.Location = new System.Drawing.Point(349, 14);
-            this.btnCreate_auto.Name = "btnCreate_auto";
-            this.btnCreate_auto.Size = new System.Drawing.Size(87, 23);
-            this.btnCreate_auto.TabIndex = 13;
-            this.btnCreate_auto.Text = "Create";
-            this.btnCreate_auto.UseVisualStyleBackColor = true;
-            this.btnCreate_auto.Click += new System.EventHandler(this.btnCreate_auto_Click);
-            // 
-            // packageMapCreatorToolStripMenuItem
-            // 
-            this.packageMapCreatorToolStripMenuItem.Name = "packageMapCreatorToolStripMenuItem";
-            this.packageMapCreatorToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
-            this.packageMapCreatorToolStripMenuItem.Text = "Package Map Creator";
-            this.packageMapCreatorToolStripMenuItem.Click += new System.EventHandler(this.packageMapCreatorToolStripMenuItem_Click);
-            // 
-            // hilfeToolStripMenuItem
-            // 
-            this.hilfeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.anleitungToolStripMenuItem,
-            this.aboutToolStripMenuItem});
-            this.hilfeToolStripMenuItem.Name = "hilfeToolStripMenuItem";
-            this.hilfeToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.hilfeToolStripMenuItem.Text = "Hilfe";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // anleitungToolStripMenuItem
-            // 
-            this.anleitungToolStripMenuItem.Name = "anleitungToolStripMenuItem";
-            this.anleitungToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.anleitungToolStripMenuItem.Text = "Anleitung";
-            this.anleitungToolStripMenuItem.Click += new System.EventHandler(this.anleitungToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(473, 651);
+            this.ClientSize = new System.Drawing.Size(473, 450);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.statusBar);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.gbxAddFiles);
             this.Controls.Add(this.gbxLogin);
             this.Controls.Add(this.msOptions);
             this.HelpButton = true;
@@ -512,8 +423,6 @@
             this.Text = "GDX";
             this.gbxLogin.ResumeLayout(false);
             this.gbxLogin.PerformLayout();
-            this.gbxAddFiles.ResumeLayout(false);
-            this.gbxAddFiles.PerformLayout();
             this.msOptions.ResumeLayout(false);
             this.msOptions.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -532,21 +441,12 @@
         private System.Windows.Forms.GroupBox gbxLogin;
         private System.Windows.Forms.Label passwort;
         private System.Windows.Forms.Label benutzer;
-        private System.Windows.Forms.GroupBox gbxAddFiles;
-        private System.Windows.Forms.Label lblFiles;
-        private System.Windows.Forms.ListBox lstFilePaths;
-        private System.Windows.Forms.Button btnRemoveFile;
-        private System.Windows.Forms.Button btnAddFile;
-        private System.Windows.Forms.Button btnBrowse;
-        private System.Windows.Forms.TextBox txtAddFile;
-        private System.Windows.Forms.Label lblAddFile;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnUpload;
         private System.Windows.Forms.TextBox password;
         private System.Windows.Forms.TextBox username;
-        private System.Windows.Forms.Button btnZip;
         private System.Windows.Forms.MenuStrip msOptions;
         private System.Windows.Forms.ToolStripMenuItem optionenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changeZipFolderToolStripMenuItem;
@@ -555,24 +455,25 @@
         private System.Windows.Forms.TextBox txtFDescription;
         private System.Windows.Forms.TextBox txtFName;
         private System.Windows.Forms.CheckBox chbFRaster;
-        private System.Windows.Forms.CheckBox chbFShape;
+        private System.Windows.Forms.CheckBox chbFVector;
         private System.Windows.Forms.Label lblFTags;
         private System.Windows.Forms.Label lblFDescription;
         private System.Windows.Forms.Label lblFName;
-        private System.Windows.Forms.StatusStrip statusBar;
-        private System.Windows.Forms.ToolStripProgressBar sbProgressBar;
-        private System.Windows.Forms.ToolStripStatusLabel sbLabel;
+        public System.Windows.Forms.StatusStrip statusBar;
+        public System.Windows.Forms.ToolStripProgressBar sbProgressBar;
+        public System.Windows.Forms.ToolStripStatusLabel sbLabel;
         private System.Windows.Forms.Label lblDataType;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripMenuItem gDXHomepageToolStripMenuItem;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblFile;
-        private System.Windows.Forms.TextBox txbFilename;
+        public System.Windows.Forms.TextBox txbFilename;
         private System.Windows.Forms.Button btnCreate_auto;
         private System.Windows.Forms.ToolStripMenuItem packageMapCreatorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hilfeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem anleitungToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.Button btnAddOtherFiles;
     }
 }
