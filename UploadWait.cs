@@ -19,11 +19,13 @@ namespace GDX
         public void btnCancel_Click(object sender, EventArgs e)
         {
             // TODO cancel uploading progress
+            //this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
         private void btnOk_Click(object sender, EventArgs e)
         {
+            //this.DialogResult = DialogResult.OK;
             this.Close();
         }
     }

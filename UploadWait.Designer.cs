@@ -66,6 +66,7 @@
             // 
             // btnOk
             // 
+            this.btnOk.AccessibleRole = System.Windows.Forms.AccessibleRole.Window;
             this.btnOk.Location = new System.Drawing.Point(75, 120);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);

@@ -1,0 +1,16 @@
+C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\bin\Release\GDX.dll
+C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\bin\Release\GDX.pdb
+C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\bin\Release\ICSharpCode.SharpZipLib.dll
+C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Release\ResolveAssemblyReference.cache
+C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Release\GDX.AddData.resources
+C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Release\GDX.Form1.resources
+C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Release\GDX.About.resources
+C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Release\GDX.UploadWait.resources
+C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Release\GDX.HelpForm.resources
+C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Release\GDX.Properties.Resources.resources
+C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Release\GDX.SaveToFolder.resources
+C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Release\ResGen.read.1.tlog
+C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Release\ResGen.write.1.tlog
+C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Release\GDX.dll
+C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\obj\Release\GDX.pdb
+C:\Users\bsoer\documents\visual studio 2010\Projects\GDX\GDX\bin\Release\GDX.esriAddIn

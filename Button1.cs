@@ -18,6 +18,7 @@ namespace GDX
             //
             ArcMap.Application.CurrentTool = null;
             Form1 form1 = new Form1();
+            form1.Activate();
             form1.Show();            
         }
         protected override void OnUpdate()

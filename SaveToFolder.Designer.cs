@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaveToFolder));
             this.gbxDestination = new System.Windows.Forms.GroupBox();
+            this.btnWinTempPath = new System.Windows.Forms.Button();
             this.btnSaveBrowse = new System.Windows.Forms.Button();
             this.txtSaveTo = new System.Windows.Forms.TextBox();
             this.lblSaveTo = new System.Windows.Forms.Label();
@@ -41,15 +42,26 @@
             // 
             // gbxDestination
             // 
+            this.gbxDestination.Controls.Add(this.btnWinTempPath);
             this.gbxDestination.Controls.Add(this.btnSaveBrowse);
             this.gbxDestination.Controls.Add(this.txtSaveTo);
             this.gbxDestination.Controls.Add(this.lblSaveTo);
             this.gbxDestination.Location = new System.Drawing.Point(12, 12);
             this.gbxDestination.Name = "gbxDestination";
-            this.gbxDestination.Size = new System.Drawing.Size(408, 81);
+            this.gbxDestination.Size = new System.Drawing.Size(408, 96);
             this.gbxDestination.TabIndex = 9;
             this.gbxDestination.TabStop = false;
             this.gbxDestination.Text = "Set folder for compressed files";
+            // 
+            // btnWinTempPath
+            // 
+            this.btnWinTempPath.Location = new System.Drawing.Point(86, 57);
+            this.btnWinTempPath.Name = "btnWinTempPath";
+            this.btnWinTempPath.Size = new System.Drawing.Size(118, 23);
+            this.btnWinTempPath.TabIndex = 6;
+            this.btnWinTempPath.Text = "Windows Temp Path";
+            this.btnWinTempPath.UseVisualStyleBackColor = true;
+            this.btnWinTempPath.Click += new System.EventHandler(this.btnWinTempPath_Click);
             // 
             // btnSaveBrowse
             // 
@@ -82,7 +94,7 @@
             // 
             // ok
             // 
-            this.ok.Location = new System.Drawing.Point(332, 99);
+            this.ok.Location = new System.Drawing.Point(332, 114);
             this.ok.Name = "ok";
             this.ok.Size = new System.Drawing.Size(75, 23);
             this.ok.TabIndex = 10;
@@ -92,7 +104,7 @@
             // 
             // cancel
             // 
-            this.cancel.Location = new System.Drawing.Point(17, 99);
+            this.cancel.Location = new System.Drawing.Point(12, 114);
             this.cancel.Name = "cancel";
             this.cancel.Size = new System.Drawing.Size(75, 23);
             this.cancel.TabIndex = 11;
@@ -104,7 +116,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(433, 129);
+            this.ClientSize = new System.Drawing.Size(433, 149);
             this.Controls.Add(this.cancel);
             this.Controls.Add(this.ok);
             this.Controls.Add(this.gbxDestination);
@@ -126,5 +138,6 @@
         private System.Windows.Forms.Button ok;
         private System.Windows.Forms.Button cancel;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Button btnWinTempPath;
     }
 }

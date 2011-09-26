@@ -37,14 +37,27 @@ namespace GDX
 
         private void ok_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.OK;
-            this.Close();
+            if (txtSaveTo.Text == string.Empty)
+            {
+                MessageBox.Show("Please enter a valid path.");
+            }
+            else
+            {
+                DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
 
         private void cancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void btnWinTempPath_Click(object sender, EventArgs e)
+        {
+            string pathWithSlash = System.IO.Path.GetTempPath();
+            txtSaveTo.Text = pathWithSlash.TrimEnd('\\');
         }
 
 

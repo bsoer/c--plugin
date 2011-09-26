@@ -83,7 +83,7 @@
             // lblMailPh
             // 
             this.lblMailPh.AutoSize = true;
-            this.lblMailPh.Location = new System.Drawing.Point(154, 77);
+            this.lblMailPh.Location = new System.Drawing.Point(155, 77);
             this.lblMailPh.Name = "lblMailPh";
             this.lblMailPh.Size = new System.Drawing.Size(142, 13);
             this.lblMailPh.TabIndex = 4;
@@ -92,7 +92,7 @@
             // lblMailMag
             // 
             this.lblMailMag.AutoSize = true;
-            this.lblMailMag.Location = new System.Drawing.Point(131, 98);
+            this.lblMailMag.Location = new System.Drawing.Point(130, 98);
             this.lblMailMag.Name = "lblMailMag";
             this.lblMailMag.Size = new System.Drawing.Size(165, 13);
             this.lblMailMag.TabIndex = 5;
