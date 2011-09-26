@@ -147,13 +147,13 @@ namespace GDX
             }
 
             // make sure there is a destination defined
-            if (workingDir == string.Empty)
+            if (saveFolder.Text == string.Empty && workingDir == string.Empty)
             {
                 saveFolder.Text = frm1.createGDXTempFolder();
             }
             else // change temp zip path
             {
-                saveFolder.Text = workingDir;
+                saveFolder.Text = frm1.createGDXTempFolder();
             }
 
             saveFolder.Refresh();
@@ -165,12 +165,22 @@ namespace GDX
             // check to see if zipped file already exists
             // user may rename it in the text box if it does.
             FileInfo fi = new FileInfo(saveFolder.Text + "\\" + sZipFileName + ".zip");
-            
             if (fi.Exists)
             {
                 // move it to the folder
-                MessageBox.Show("The file " + sZipFileName + ".zip already exists in " + saveFolder.Text + "\\. \n" +
-                                    "The File will be overwritten.");
+                try
+                {
+                    MessageBox.Show("The file " + sZipFileName + ".zip already exists in " + saveFolder.Text + "\\. \n" +
+                                        "Choose another folder to save the file. (Options Menu)");
+                    //frm1.sbLabel.Text = "Choose another Folder to save the file. (Options Menu)";
+                    //machen
+                    return;
+                }
+                catch
+                {
+                    MessageBox.Show("Rename the file or select a new location.");
+                    return;
+                }
             }
 
             // Check for the existence of the target folder and
@@ -208,7 +218,11 @@ namespace GDX
             // zip up the files
             try
             {
-                //TODO graphical bug in uw while zipping
+                //frm1.sbProgressBar.Visible = true;
+                //frm1.sbLabel.Text = "Zipping files, please wait ...";
+                //frm1.statusBar.Refresh();
+                //machen
+
                 UploadWait uw = new UploadWait();
                 uw.Show();
                 uw.lblUploadWait.Text = "Zipping files...";
@@ -252,17 +266,31 @@ namespace GDX
                 uw.btnCancel.Visible = false;
                 uw.btnOk.Visible = true;
 
+                // remove the progress bar + change lable
+                //sbProgressBar.Visible = false;
+                //sbLabel.Text = "Files have been zipped. Zip file " + frm1.fpath_file + "created.";
+                //machen
+
                 // clean up files by deleting the temp folder and its content
                 System.IO.Directory.Delete(saveFolder.Text + "\\TempZipFile\\", true);
 
+                // Notify user
                 fpath = saveFolder.Text + "\\" + sZipFileName + ".zip";
+                //MessageBox.Show("Zip file " + frm1.fpath_file + " created.");
                 filePath = sZipFileName + ".zip";
+                //frm1.txbFilename.Refresh();
+                //machen
+
+                //show savefolder in mainForm
+                //frm1.saveFolder.Text = saveFolder.Text;
+                //machen
 
                 // empty everything
                 lstFilePaths.Items.Clear();
                 txtAddFile.Text = string.Empty;
                 saveFolder.Text = string.Empty;
                 workingDir = string.Empty;
+                //MessageBox.Show("Zipfilename: ", sZipFileName);
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -270,12 +298,13 @@ namespace GDX
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString(), "Zip Operation Error");
+                //frm1.sbLabel.Text = "Zip Operation Error";
+                //machen
             }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
     }

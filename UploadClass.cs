@@ -126,7 +126,7 @@ namespace GDX
             //KeyValuePair<string, string> credentials = new KeyValuePair<string, string>("philipp@gdx.org", "janjan");
 
             try
-            {   //TODO manual input for uri
+            {
                 WebResponse responce = MultipartFileUpload(uploadfile, new Uri("http://46.252.21.47/uploads"), credentials, "upload[file]", fields);
                 StreamReader sr = new StreamReader(responce.GetResponseStream());
                 string result = sr.ReadToEnd();

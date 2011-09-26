@@ -24,14 +24,20 @@ using ESRI.ArcGIS.AnalysisTools;
 using ESRI.ArcGIS.CatalogUI;
 using ESRI.ArcGIS.Display;
 
+
+//using IronPython.Hosting;
+//using Microsoft.Scripting.Hosting;
+
 namespace GDX
 {
     public partial class Form1 : Form
     {
         public string fpath_file = string.Empty;
         public String PMPath = string.Empty;
-        public string workingDir = string.Empty;
-                
+        public TextBox saveFolder = new TextBox();
+        string workingDir = "";
+        UploadWait uw = new UploadWait();
+        
 
         public Form1()
         {
@@ -42,7 +48,7 @@ namespace GDX
         public string txbFilenamePUB
         {
             get { return this.txbFilename.Text; }
-            set { this.txbFilename.Text = value; }
+            set { this.txbFilename.Text = value; MessageBox.Show("sadfsdf" + txbFilename.Text);  }
         }
 
         private void frm_Closed_SaveToFolder(object sender, EventArgs e)
@@ -52,7 +58,7 @@ namespace GDX
             {
                 if (frm.DialogResult == DialogResult.OK)
                 {
-                    workingDir = frm.TextImTextBoxAufForm2;
+                    this.saveFolder.Text = frm.TextImTextBoxAufForm2;
                 }
                 frm.Closed -= new EventHandler(frm_Closed_SaveToFolder);
             }
@@ -67,6 +73,7 @@ namespace GDX
                 {
                     this.txbFilename.Text = frm.PUBfilePath;
                     this.fpath_file = frm.PUBfpath;
+                    workingDir = string.Empty;
                 }
                 frm.Closed -= new EventHandler(frm_Closed_AddData);
             }
@@ -74,25 +81,33 @@ namespace GDX
 
         public string createGDXTempFolder()
         {
-            if (workingDir == string.Empty)
-            {
-                // Windows Default Temp Dir Path
-                // current time (used for new Temp folder name)
-                workingDir = System.IO.Path.GetTempPath() + "GDX" + string.Format("-{0:yyyy-MM-dd_HH-mm-ss-ffff}", DateTime.Now);
-            }
+            // Windows Default Temp Dir Path
+            string tempPath = System.IO.Path.GetTempPath();
+            //MessageBox.Show("Windows Temp Path = " + tempPath);
+
+            // current time (used for new Temp folder name)
+            String workingDir = tempPath + "GDX" + string.Format("-{0:yyyy-MM-dd_HH-mm-ss-ffff}", DateTime.Now);
+            //MessageBox.Show("WorkingDir: " + workingDir);
 
             // Check for the existence of the new working directory
             if (Directory.Exists(workingDir))
             {
-                MessageBox.Show("Directory " + workingDir + " already exists. \n" +
-                                    "Choose another folder to save the file. (Options Menu)");
-                sbLabel.Text = "Choose another folder to save the file. (Options Menu)";
-                return "";
+                try
+                {
+                    MessageBox.Show("Directory " + workingDir + " already exists. \n" +
+                                        "Choose another folder to save the file. (Options Menu)");
+                    sbLabel.Text = "Choose another folder to save the file. (Options Menu)";
+                    return "";
+                }
+                catch
+                {
+                    MessageBox.Show("Rename the file or select a new location.");
+                    return "";
+                }
             }
             else
             {
                 System.IO.Directory.CreateDirectory(workingDir);
-                //TODO temp folder deletion necessary?
                 //MessageBox.Show("Sub temp folder " + workingDir + " created");
                 return workingDir;
             }
@@ -121,7 +136,7 @@ namespace GDX
 
             UploadWait uw = new UploadWait();
             uw.Show();
-            //TODO save Username
+
             NameValueCollection fields = new NameValueCollection();
             fields.Add("upload[name]", txtFName.Text);
             fields.Add("upload[description]", txtFDescription.Text);
@@ -168,20 +183,22 @@ namespace GDX
 
         public void btnCreate_auto_Click(object sender, EventArgs e)
         {
-            UploadWait uw = new UploadWait();
+            // Initialize the geoprocessor. 
+            Geoprocessor GP = new Geoprocessor();
             try
             {
-                // Initialize the geoprocessor. 
-                Geoprocessor GP = new Geoprocessor();
-                GP.OverwriteOutput = true;
                 sbLabel.Text = "Creating Map Package... ";
-                uw.lblUploadWait.Text = "Creating Map Package...";
                 uw.Show();
+                uw.lblUploadWait.Text = "Creating Map Package...";
 
                 if (workingDir == string.Empty)
                 {
                     workingDir = createGDXTempFolder();
                 }
+
+                // Project Directory
+                //string projDir = System.IO.Directory.GetCurrentDirectory();
+                //MessageBox.Show("ProjDir: " + projDir);
 
                 // The active document is always the last template
                 ITemplates templates = ArcMap.Application.Templates;
@@ -206,19 +223,12 @@ namespace GDX
 
                 sbLabel.Text = "Map Package successfully created. ";
 
-                //Workaround for background problem, but flickering
-                //TODO
-                this.Activate();
-                uw.Activate();
-
-                //this.BringToFront();
-                //uw.BringToFront();
             }
             catch
             {
                 //MessageBox.Show("Python-Error (" + GP.GetReturnCode(0) + "), try to create the map package manually (option menu)");uw.Close();
                 uw.Close();
-                MessageBox.Show("Please enter a description for the document. \n (File -> Map Document Properties -> Description)");
+                MessageBox.Show("Please enter a description for the document. (File -> Map Document Properties -> Description)");
                 return;
             }
         }
@@ -253,9 +263,7 @@ namespace GDX
         private void anleitungToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HelpForm hfrm = new HelpForm();
-            hfrm.Activate();
-            Help.ShowHelp(hfrm, "Addins\\GDX.chm", HelpNavigator.TableOfContents);
-            //TODO focus bug (sometimes)
+            Help.ShowHelp(hfrm, "..\\..\\Help\\GDX.chm", HelpNavigator.Index);
         }
 
         private void btnAddOtherFiles_Click(object sender, EventArgs e)
@@ -268,5 +276,7 @@ namespace GDX
 
             sbLabel.Text = "Please enter the filename, description, tags and data type.";
        }
+
+
     }
 }
